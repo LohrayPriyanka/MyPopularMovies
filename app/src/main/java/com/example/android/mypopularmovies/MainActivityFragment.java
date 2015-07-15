@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 
@@ -82,10 +84,10 @@ private static ImageView imageView0, imageView1, imageView2, imageView3, imageVi
 
     public class pMoviesAdapter extends ArrayAdapter {
         Context mContext;
-        private ArrayList<MovieDataStructure> mObjects; //There is < > around MovieDataStructure. The editor hides MovieDataStructure if I include them.
+        private ArrayList<String> mObjects; //There is < > around MovieDataStructure. The editor hides MovieDataStructure if I include them.
         private int mImageViewResourceId;
         private int mResource;
-    public pMoviesAdapter(Context context,int resource, int imageViewResourceId, ArrayList<MovieDataStructure> objects){
+    public pMoviesAdapter(Context context,int resource, int imageViewResourceId, ArrayList<String> objects){
         super(context,resource,imageViewResourceId,objects);
         this.mContext = context;
         this.mResource = resource;
@@ -98,26 +100,24 @@ private static ImageView imageView0, imageView1, imageView2, imageView3, imageVi
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        View imageView;
+        ImageView imageView;
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(convertView == null) {
-            imageView = new View(mContext);
+            imageView = new ImageView(mContext);
 
-            imageView = inflater.inflate(mResource, parent, false);
+            //imageView = inflater.inflate(mResource, parent, false);
 
-            ImageView gridImageView = (ImageView) imageView.findViewById(mImageViewResourceId);
-            gridImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-            Picasso.with(mContext)
-                    .load(mObjects.get(position).getPosterUrl())
-                    .error(R.drawable.untitled)
-                    .placeholder(R.drawable.untitled)
-                    .into(gridImageView);
+            //ImageView gridImageView = (ImageView) imageView.findViewById(mImageViewResourceId);
+            //gridImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setAdjustViewBounds(true);
+            imageView.setPadding(0, 0, 0, 0);
+        } else {
+            imageView = (ImageView) convertView;
         }
-        else{
-            imageView = (View)convertView;
-        }
+
+        Picasso.with(mContext).load("posterUrl").into(imageView);
+
         return imageView;
     }
 }
