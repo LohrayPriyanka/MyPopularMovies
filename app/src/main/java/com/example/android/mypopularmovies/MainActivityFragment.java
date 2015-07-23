@@ -101,7 +101,7 @@ private static ImageView imageView0, imageView1, imageView2, imageView3, imageVi
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         ImageView imageView;
-        LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(convertView == null) {
             imageView = new ImageView(mContext);
